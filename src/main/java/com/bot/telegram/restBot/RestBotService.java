@@ -20,7 +20,7 @@ public class RestBotService {
     private String chatId;
 
     public void sendAlert(String alert) {
-        String url = "https://api.telegram.org/bot"+botToken+"/sendMessage";
+        String url = "https://api.telegram.org/bot" + botToken + "/sendMessage";
 
         Map<String, String> body = new HashMap<>();
         body.put("chat_id", chatId);

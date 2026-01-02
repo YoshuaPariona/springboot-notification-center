@@ -4,3 +4,4 @@ spring:
 telegram:
   bot:
     token: ${TELEGRAM_TOKEN}
+    username: springboot_alertbot
