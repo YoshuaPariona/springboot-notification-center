@@ -1,0 +1,44 @@
+package com.bot.telegram.alarmBot;
+
+import com.bot.telegram.alarmBot.customer.Customer;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
+
+@Service
+public class AlarmBotService {
+    private final TelegramClient telegramClient;
+    private final String chatId;
+
+    public AlarmBotService(
+            @Value("${telegram.bot.token}") String botToken,
+            @Value("${telegram.bot.chat-id}") String chatId
+    ) {
+        this.chatId = chatId;
+        this.telegramClient = new OkHttpTelegramClient(botToken);
+    }
+
+    public void sendAlarm(Customer customer) {
+        String text = """
+        El cliente %s acaba de obtener un valor de churn de %s
+        """.formatted(customer.getName(), customer.getChurnValue());
+        SendMessage message = SendMessage.builder()
+                .chatId(chatId)
+                .text(text)
+                .build();
+        try {
+            telegramClient.execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @EventListener
+    public void onHighChurn(HighChurnEvent highChurnEvent) {
+        sendAlarm(highChurnEvent.customer());
+    }
+}

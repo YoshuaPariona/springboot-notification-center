@@ -1,5 +1,8 @@
 package com.bot.telegram.alarmBot.customer;
 
+import com.bot.telegram.alarmBot.AlarmBotService;
+import com.bot.telegram.alarmBot.HighChurnEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,13 +12,17 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(
+            CustomerRepository customerRepository,
+            ApplicationEventPublisher applicationEventPublisher
+    ) {
         this.customerRepository = customerRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     public List<Customer> getCustomerList() {
-
         return customerRepository.findAll();
     }
 
@@ -23,7 +30,7 @@ public class CustomerService {
         Customer customer = customerRepository.getCustomerById(id);
 
         if(customer.getChurnValue().compareTo(BigDecimal.valueOf(0.75))> 0) {
-            System.out.println("trigger!!!!!!!!!!!!!");
+            applicationEventPublisher.publishEvent(new HighChurnEvent(customer));
         }
 
         return customerRepository.getCustomerById(id);

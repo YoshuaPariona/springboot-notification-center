@@ -3,7 +3,6 @@ package com.bot.telegram.alarmBot;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot;
@@ -15,16 +14,12 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 @Profile("alarmBot")
 @Component
-public class AlarmBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+public class AlarmBotCore implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
     private final String botToken;
-    private final String botUsername;
     private final TelegramClient telegramClient;
 
-    public AlarmBot(
-            @Value("${telegram.bot.token}") String botToken,
-            @Value("${telegram.bot.username}") String botUsername) {
+    public AlarmBotCore(@Value("${telegram.bot.token}") String botToken) {
         this.botToken = botToken;
-        this.botUsername = botUsername;
         this.telegramClient = new OkHttpTelegramClient(botToken);
     }
 
@@ -42,7 +37,6 @@ public class AlarmBot implements SpringLongPollingBot, LongPollingSingleThreadUp
     public void consume(Update update) {
         if(update.hasMessage() && update.getMessage().hasText()) {
             Long chatId = update.getMessage().getChatId();
-            String text = update.getMessage().getText();
 
             SendMessage message = SendMessage.builder()
                     .chatId(chatId)
@@ -55,4 +49,5 @@ public class AlarmBot implements SpringLongPollingBot, LongPollingSingleThreadUp
             }
         }
     }
+
 }
