@@ -94,6 +94,11 @@
             <artifactId>flyway-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-oracle</artifactId>
+            <version>11.20.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
             <scope>runtime</scope>
