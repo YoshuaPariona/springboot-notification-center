@@ -1,4 +1,4 @@
-package com.bot.telegram.alarmBot.customer;
+package com.bot.telegram.customer;
 
 import jakarta.persistence.*;
 import lombok.Getter;

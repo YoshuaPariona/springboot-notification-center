@@ -1,7 +1,6 @@
 package com.bot.telegram.alarmBot;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
@@ -12,13 +11,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-@Profile("alarmBot")
 @Component
-public class AlarmBotCore implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
+public class AlarmBotResponse implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
     private final String botToken;
     private final TelegramClient telegramClient;
 
-    public AlarmBotCore(@Value("${telegram.bot.token}") String botToken) {
+    public AlarmBotResponse(@Value("${telegram.bot.token}") String botToken) {
         this.botToken = botToken;
         this.telegramClient = new OkHttpTelegramClient(botToken);
     }

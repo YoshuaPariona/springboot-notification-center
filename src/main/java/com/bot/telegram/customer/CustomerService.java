@@ -1,7 +1,6 @@
-package com.bot.telegram.alarmBot.customer;
+package com.bot.telegram.customer;
 
-import com.bot.telegram.alarmBot.AlarmBotService;
-import com.bot.telegram.alarmBot.HighChurnEvent;
+import com.bot.telegram.event.HighChurnEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

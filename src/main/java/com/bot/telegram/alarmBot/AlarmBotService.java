@@ -1,6 +1,7 @@
 package com.bot.telegram.alarmBot;
 
-import com.bot.telegram.alarmBot.customer.Customer;
+import com.bot.telegram.customer.Customer;
+import com.bot.telegram.event.HighChurnEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

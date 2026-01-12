@@ -1,4 +1,4 @@
-package com.bot.telegram.alarmBot.customer;
+package com.bot.telegram.customer;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v2/alarmCustomer")
+@RequestMapping("api/alarmCustomer")
 public class CustomerController {
 
     private final CustomerService customerService;
