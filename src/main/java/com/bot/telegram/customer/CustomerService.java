@@ -1,6 +1,7 @@
 package com.bot.telegram.customer;
 
 import com.bot.telegram.event.HighChurnEvent;
+import com.bot.telegram.event.MediumChurnEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,8 @@ public class CustomerService {
 
         if(customer.getChurnValue().compareTo(BigDecimal.valueOf(0.75))> 0) {
             applicationEventPublisher.publishEvent(new HighChurnEvent(customer));
+        } else if (customer.getChurnValue().compareTo(BigDecimal.valueOf(0.50))> 0) {
+            applicationEventPublisher.publishEvent(new MediumChurnEvent(customer));
         }
 
         return customerRepository.getCustomerById(id);
