@@ -1,4 +1,4 @@
-package com.bot.telegram.customer;
+package com.notification.center.customer;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

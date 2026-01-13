@@ -1,4 +1,4 @@
-package com.bot.telegram.customer;
+package com.notification.center.customer;
 
 import jakarta.persistence.*;
 import lombok.Getter;

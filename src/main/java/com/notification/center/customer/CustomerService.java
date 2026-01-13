@@ -1,7 +1,7 @@
-package com.bot.telegram.customer;
+package com.notification.center.customer;
 
-import com.bot.telegram.event.HighChurnEvent;
-import com.bot.telegram.event.MediumChurnEvent;
+import com.notification.center.event.HighChurnEvent;
+import com.notification.center.event.MediumChurnEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

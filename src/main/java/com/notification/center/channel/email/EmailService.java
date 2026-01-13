@@ -1,7 +1,7 @@
-package com.bot.telegram.email;
+package com.notification.center.channel.email;
 
-import com.bot.telegram.customer.Customer;
-import com.bot.telegram.event.MediumChurnEvent;
+import com.notification.center.customer.Customer;
+import com.notification.center.event.MediumChurnEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.mail.SimpleMailMessage;

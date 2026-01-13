@@ -1,7 +1,7 @@
-package com.bot.telegram.alarmBot;
+package com.notification.center.channel.telegramBot;
 
-import com.bot.telegram.customer.Customer;
-import com.bot.telegram.event.HighChurnEvent;
+import com.notification.center.customer.Customer;
+import com.notification.center.event.HighChurnEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -11,11 +11,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 @Service
-public class AlarmBotService {
+public class TelegramBotService {
     private final TelegramClient telegramClient;
     private final String chatId;
 
-    public AlarmBotService(
+    public TelegramBotService(
             @Value("${telegram.bot.token}") String botToken,
             @Value("${telegram.bot.chat-id}") String chatId
     ) {
