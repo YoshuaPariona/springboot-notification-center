@@ -27,14 +27,14 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id) {
+/*
         Customer customer = customerRepository.getCustomerById(id);
-
         if(customer.getChurnValue().compareTo(BigDecimal.valueOf(0.75))> 0) {
             applicationEventPublisher.publishEvent(new HighChurnEvent(customer));
         } else if (customer.getChurnValue().compareTo(BigDecimal.valueOf(0.50))> 0) {
             applicationEventPublisher.publishEvent(new MediumChurnEvent(customer));
         }
-
+*/
         return customerRepository.getCustomerById(id);
     }
 }

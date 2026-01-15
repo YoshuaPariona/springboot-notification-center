@@ -24,6 +24,7 @@ public class TelegramBotService {
     }
 
     public void sendAlarm(Customer customer) {
+        /*
         String text = """
         El cliente %s acaba de obtener un valor de churn de %s
         """.formatted(customer.getName(), customer.getChurnValue());
@@ -36,6 +37,8 @@ public class TelegramBotService {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     @EventListener

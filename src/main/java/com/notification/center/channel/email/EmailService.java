@@ -22,6 +22,7 @@ public class EmailService {
     }
 
     public void sendTextEmail(Customer customer) {
+        /*
         SimpleMailMessage message = new SimpleMailMessage();
         String subject = "Churn Medio en cliente %d".formatted(customer.getId());
         String body = "Le informamos que el usuario %s ha obtenido un resultado de churn de %.2f".formatted(customer.getName(), customer.getChurnValue());
@@ -33,6 +34,8 @@ public class EmailService {
 
         mailSender.send(message);
 
+
+         */
     }
 
     @EventListener
