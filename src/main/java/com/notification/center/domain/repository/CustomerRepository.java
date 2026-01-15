@@ -1,4 +1,4 @@
-package com.notification.center.domain;
+package com.notification.center.domain.repository;
 
 import com.notification.center.domain.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

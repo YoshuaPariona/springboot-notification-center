@@ -1,4 +1,4 @@
-package com.notification.center.infrastructure;
+package com.notification.center.infrastructure.rest;
 
 import com.notification.center.application.usecase.CustomerService;
 import com.notification.center.domain.model.Customer;
