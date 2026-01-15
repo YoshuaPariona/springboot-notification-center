@@ -1,6 +1,5 @@
-package com.notification.center.churnHistory;
+package com.notification.center.domain.model;
 
-import com.notification.center.customer.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
@@ -24,11 +23,11 @@ public class ChurnHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "request_id")
+    @Column(name = "request_id", unique = true, nullable = false)
     @Size(max = 64)
     private String requestId;
 
-    @Column(name = "api_provider")
+    @Column(name = "api_provider", nullable = false)
     @Size(max = 50)
     private String apiProvider;
 
@@ -36,27 +35,33 @@ public class ChurnHistory {
     @Digits(integer = 5, fraction = 2)
     private BigDecimal churnScore;
 
-    @Column(name = "risk_level")
+    @Column(name = "risk_level", nullable = false)
     @Size(max = 20)
     private String riskLevel;
 
-    @Column(name = "http_status")
+    @Column(name = "http_status", nullable = false)
     @Min(100)
     @Max(999)
     private Integer httpStatus;
 
     @Column(name = "response_time_ms")
-    private BigDecimal responseTimeMs;
+    private Long responseTimeMs;
 
     @Lob
     @Column(name = "raw_response")
     private String rawResponse;
 
-    @Column(name = "requested_at")
+    @Column(name = "requested_at", nullable = false)
     private LocalDateTime requestedAt;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
+    @ToString.Exclude
     private Customer customer;
+
+    @PrePersist
+    protected void onCreate() {
+        this.requestedAt = LocalDateTime.now();
+    }
 
 }

@@ -1,11 +1,10 @@
-package com.notification.center.customer;
+package com.notification.center.application.usecase;
 
-import com.notification.center.event.HighChurnEvent;
-import com.notification.center.event.MediumChurnEvent;
+import com.notification.center.domain.model.Customer;
+import com.notification.center.domain.CustomerRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service

@@ -1,5 +1,7 @@
-package com.notification.center.customer;
+package com.notification.center.infrastructure;
 
+import com.notification.center.application.usecase.CustomerService;
+import com.notification.center.domain.model.Customer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

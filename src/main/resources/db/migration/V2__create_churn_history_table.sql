@@ -8,6 +8,6 @@ CREATE TABLE churn_history (
     http_status NUMBER(3) NOT NULL,
     response_time_ms NUMBER,
     raw_response CLOB,
-    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    requested_at TIMESTAMP NOT NULL,
     CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customer(id)
 );

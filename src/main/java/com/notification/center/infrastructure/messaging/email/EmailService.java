@@ -1,10 +1,9 @@
-package com.notification.center.channel.email;
+package com.notification.center.infrastructure.messaging.email;
 
-import com.notification.center.customer.Customer;
-import com.notification.center.event.MediumChurnEvent;
+import com.notification.center.domain.model.Customer;
+import com.notification.center.infrastructure.event.MediumChurnEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
