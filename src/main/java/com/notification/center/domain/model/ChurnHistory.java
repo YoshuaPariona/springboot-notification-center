@@ -32,7 +32,7 @@ public class ChurnHistory {
     private String apiProvider;
 
     @Column(name = "churn_score")
-    @Digits(integer = 5, fraction = 2)
+    @Digits(integer = 3, fraction = 2)
     private BigDecimal churnScore;
 
     @Column(name = "risk_level", nullable = false)
