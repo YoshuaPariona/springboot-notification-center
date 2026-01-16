@@ -1,0 +1,17 @@
+###
+POST http://localhost:8080/api/churn/predict
+Content-Type: application/json
+Accept: application/json
+
+{
+  "externalId": "CUST-001",
+  "fullName": "Juan Perez",
+  "email": "juan@example.com",
+  "externalRequest": {
+    "marketSegment": "RETAIL",
+    "status": "ACTIVE",
+    "totalPurchases": 15,
+    "exposedToMarketing": true
+  }
+}
+###

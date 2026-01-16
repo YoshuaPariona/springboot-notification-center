@@ -2,9 +2,7 @@ package com.notification.center.domain.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Customer {
 
     @Id
@@ -50,9 +49,27 @@ public class Customer {
     @ToString.Exclude
     private List<ChurnHistory> churnHistoryList;
 
+    public Customer(String externalId,
+                    String fullName,
+                    String email,
+                    String marketSegment,
+                    String status) {
+        this.externalId = externalId;
+        this.fullName = fullName;
+        this.email = email;
+        this.marketSegment = marketSegment;
+        this.status = status;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

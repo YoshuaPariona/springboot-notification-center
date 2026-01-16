@@ -1,10 +1,12 @@
 package com.notification.center.application.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record ChurnResponse(
         String externalId,
         LocalDateTime requestedAt,
-        ExternalResponse externalResponse
+        BigDecimal churnScore,
+        String riskLevel
 ) {
 }
