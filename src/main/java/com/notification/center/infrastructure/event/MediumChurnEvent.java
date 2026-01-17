@@ -1,6 +1,7 @@
 package com.notification.center.infrastructure.event;
 
+import com.notification.center.application.dto.ExternalResponse;
 import com.notification.center.domain.model.Customer;
 
-public record MediumChurnEvent(Customer customer) {
+public record MediumChurnEvent(Customer customer, ExternalResponse exResponse) {
 }

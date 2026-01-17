@@ -1,9 +1,11 @@
 package com.notification.center.infrastructure.messaging.email;
 
+import com.notification.center.application.dto.ExternalResponse;
 import com.notification.center.domain.model.Customer;
 import com.notification.center.infrastructure.event.MediumChurnEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +22,12 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-    public void sendTextEmail(Customer customer) {
-        /*
+    public void sendTextEmail(Customer customer, ExternalResponse exResponse) {
+
         SimpleMailMessage message = new SimpleMailMessage();
         String subject = "Churn Medio en cliente %d".formatted(customer.getId());
-        String body = "Le informamos que el usuario %s ha obtenido un resultado de churn de %.2f".formatted(customer.getName(), customer.getChurnValue());
+        String body = "Le informamos que el usuario %s ha obtenido un resultado de churn de %.2f"
+                .formatted(customer.getFullName(), exResponse.churnScore());
         message.setFrom(backEmail);
         //A sí mismo por mientras
         message.setTo(backEmail);
@@ -33,12 +36,10 @@ public class EmailService {
 
         mailSender.send(message);
 
-
-         */
     }
 
     @EventListener
     public void onMediumChurn(MediumChurnEvent mediumChurnEvent) {
-        sendTextEmail(mediumChurnEvent.customer());
+        sendTextEmail(mediumChurnEvent.customer(), mediumChurnEvent.exResponse());
     }
 }

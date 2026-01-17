@@ -9,8 +9,13 @@ import com.notification.center.domain.model.Customer;
 import com.notification.center.domain.repository.ChurnRepository;
 import com.notification.center.domain.repository.CustomerRepository;
 import com.notification.center.infrastructure.client.FalseApiChurnClient;
+import com.notification.center.infrastructure.event.HighChurnEvent;
+import com.notification.center.infrastructure.event.MediumChurnEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 
 @Service
 public class ChurnService {
@@ -18,11 +23,13 @@ public class ChurnService {
     private final FalseApiChurnClient falseApiChurnClient;
     private final ChurnRepository churnRepository;
     private final CustomerRepository customerRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public ChurnService(FalseApiChurnClient falseApiChurnClient, ChurnRepository churnRepository, CustomerRepository customerRepository) {
+    public ChurnService(FalseApiChurnClient falseApiChurnClient, ChurnRepository churnRepository, CustomerRepository customerRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.falseApiChurnClient = falseApiChurnClient;
         this.churnRepository = churnRepository;
         this.customerRepository = customerRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Transactional
@@ -36,6 +43,8 @@ public class ChurnService {
 
         customerRepository.save(customer);
         churnRepository.save(churnHistory);
+
+        publishEvent(customer, exResponse);
 
         return new ChurnResponse(
                 request.externalId(),
@@ -56,7 +65,6 @@ public class ChurnService {
                 exRequest.marketSegment(),
                 exRequest.status()
         );
-
     }
 
     private ChurnHistory getChurnHistory(
@@ -73,5 +81,13 @@ public class ChurnService {
                 customer
 
         );
+    }
+
+    private void publishEvent(Customer customer, ExternalResponse exResponse) {
+        if(exResponse.churnScore().compareTo(BigDecimal.valueOf(0.75))> 0) {
+            applicationEventPublisher.publishEvent(new HighChurnEvent(customer, exResponse));
+        } else if (exResponse.churnScore().compareTo(BigDecimal.valueOf(0.50))> 0) {
+            applicationEventPublisher.publishEvent(new MediumChurnEvent(customer, exResponse));
+        }
     }
 }
