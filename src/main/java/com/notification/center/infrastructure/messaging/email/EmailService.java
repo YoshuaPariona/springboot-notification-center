@@ -26,7 +26,7 @@ public class EmailService {
     public void sendTextEmail(Customer customer, ExternalResponse exResponse) {
 
         SimpleMailMessage message = new SimpleMailMessage();
-        String subject = "Churn Medio en cliente %d".formatted(customer.getId());
+        String subject = "Churn %s en cliente %s".formatted(exResponse.riskLevel(), customer.getExternalId());
         String body = "Le informamos que el usuario %s ha obtenido un resultado de churn de %.2f"
                 .formatted(customer.getFullName(), exResponse.churnScore());
         message.setFrom(backEmail);
