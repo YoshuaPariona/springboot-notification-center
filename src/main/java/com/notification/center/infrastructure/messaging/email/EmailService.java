@@ -37,12 +37,7 @@ public class EmailService {
         mailSender.send(message);
 
     }
-
-    @EventListener
-    public void onMediumChurn(MediumChurnEvent mediumChurnEvent) {
-        sendTextEmail(mediumChurnEvent.customer(), mediumChurnEvent.exResponse());
-    }
-
+    
     @EventListener
     public void onHighChurn(HighChurnEvent highChurnEvent) {
         sendTextEmail(highChurnEvent.customer(), highChurnEvent.exResponse());
