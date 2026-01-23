@@ -16,7 +16,7 @@ public class FalseApiChurnClient implements ChurnExternalService {
 
         return new ExternalResponse(
                 UUID.randomUUID().toString(),
-                BigDecimal.valueOf(56),
+                BigDecimal.valueOf(Math.random()),
                 "LOW"
         );
     }
