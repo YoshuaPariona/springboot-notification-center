@@ -11,14 +11,12 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final ApplicationEventPublisher applicationEventPublisher;
 
     public CustomerService(
             CustomerRepository customerRepository,
             ApplicationEventPublisher applicationEventPublisher
     ) {
         this.customerRepository = customerRepository;
-        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     public List<Customer> getCustomerList() {
@@ -26,14 +24,6 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id) {
-/*
-        Customer customer = customerRepository.getCustomerById(id);
-        if(customer.getChurnValue().compareTo(BigDecimal.valueOf(0.75))> 0) {
-            applicationEventPublisher.publishEvent(new HighChurnEvent(customer));
-        } else if (customer.getChurnValue().compareTo(BigDecimal.valueOf(0.50))> 0) {
-            applicationEventPublisher.publishEvent(new MediumChurnEvent(customer));
-        }
-*/
         return customerRepository.getCustomerById(id);
     }
 }
